@@ -1,0 +1,20 @@
+config:
+  target: "https://api.todoist.com"
+  phases:
+    - duration: 1
+      arrivalRate: 1
+      name: "Get all Tasks"
+  defaults:
+    headers:
+      Authorization: Bearer {{ $processEnvironment.token }}
+      Content-Type: application/json
+  variables:
+    url_tasks:
+      - "/rest/v1/tasks"
+scenarios:
+  - name: "Get all tasks"
+    flow:
+    - get:
+        url: "{{ url_tasks }}"
+        expect:
+          - statusCode: 200

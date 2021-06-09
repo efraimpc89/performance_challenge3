@@ -1,0 +1,33 @@
+config:
+  target: "https://api.todoist.com"
+  plugins:
+    faker:
+      locale: en
+  phases:
+    - duration: 1
+      arrivalRate: 1
+      name: "Change Task Status to Complete"
+  defaults:
+    headers:
+      Authorization: Bearer {{ $processEnvironment.token }}
+      Content-Type: application/json
+  variables:
+    url_tasks:
+      - "/rest/v1/tasks"
+    task_name:
+      - "$faker.address.cityName"
+scenarios:
+  - name: "Create and close/complete a Task"
+    flow:
+    - post:
+        url: "{{ url_tasks }}"
+        json:
+          content: "{{ task_name }}"
+        capture:
+          json: "$.id"
+          as: "id_task"
+    - log: "New task '{{ task_name }}' with id: {{ id_task }}"
+    - post: 
+        url: "{{ url_tasks }}/{{ id_task }}/close"
+        expect:
+          - statusCode: 204

@@ -1,0 +1,30 @@
+{
+  "name": "performance_challenge3",
+  "version": "1.0.0",
+  "description": "Performance Testing - Challenge 3",
+  "main": "index.js",
+  "scripts": {
+    "all-flows-task": "artillery run ./scripts/AllFlows.yml",
+    "create-tasks": "artillery run ./scripts/CreateTask.yml",
+    "get-all-tasks": "artillery run ./scripts/GetAllTasks.yml",
+    "get-active-task": "artillery run ./scripts/GetActiveTask.yml",
+    "update-task": "artillery run ./scripts/UpdateTask.yml",
+    "complete-task": "artillery run ./scripts/ChangeTaskStatusToComplete.yml",
+    "reopen-task": "artillery run ./scripts/ReopenATask.yml",
+    "delete-task": "artillery run ./scripts/DeleteTask.yml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/efraimpc89/performance_challenge3.git"
+  },
+  "author": "Efraim Peña",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/efraimpc89/performance_challenge3/issues"
+  },
+  "homepage": "https://github.com/efraimpc89/performance_challenge3#readme",
+  "devDependencies": {
+    "artillery": "^1.7.2",
+    "artillery-plugin-faker": "^3.0.0"
+  }
+}

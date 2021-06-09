@@ -1,0 +1,34 @@
+config:
+  target: "https://api.todoist.com"
+  plugins:
+    faker:
+      locale: en
+  phases:
+    - duration: 2
+      arrivalRate: 1
+      name: "Get an active Task"
+  defaults:
+    headers:
+      Authorization: Bearer {{ $processEnvironment.token }}
+      Content-Type: application/json
+  variables:
+    url_tasks:
+      - "/rest/v1/tasks"
+    task_name:
+      - "$faker.address.cityName"
+scenarios:
+  - name: "Create and Get and Active Task"
+    flow:
+    - post:
+        url: "{{ url_tasks }}"
+        json:
+          content: "{{ task_name }}"
+        capture:
+          json: "$.id"
+          as: "id_task"
+    - log: "New task '{{ task_name }}' with id: {{ id_task }}"
+    - get: 
+        url: "{{ url_tasks }}/{{ id_task }}"
+        expect:
+          - statusCode: 200
+    - log: "Get request to to specific task with id: {{ id_task }}"

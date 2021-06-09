@@ -1,0 +1,52 @@
+config:
+  target: "https://api.todoist.com"
+  plugins:
+    faker:
+      locale: en
+  phases:
+    - duration: 1
+      arrivalRate: 1
+      name: "Full task flow"
+  defaults:
+    headers:
+      Authorization: Bearer {{ $processEnvironment.token }}
+      Content-Type: application/json
+  variables:
+    url_tasks:
+      - "/rest/v1/tasks"
+    task_name:
+      - "$faker.address.cityName"
+scenarios:
+  - name: "Full task flow"
+    flow:
+    - post:
+        url: "{{ url_tasks }}"
+        json:
+          content: "{{ task_name }}"
+        capture:
+          json: "$.id"
+          as: "id_task"
+    - log: "New task '{{ task_name }}' with id: {{ id_task }}"
+    - get: 
+        url: "{{ url_tasks }}/{{ id_task }}"
+        expect:
+          - statusCode: 200
+    - log: "Get request to to specific task with id: {{ id_task }}"
+    - post: 
+        url: "{{ url_tasks }}/{{ id_task }}"
+        json:
+          content: "updated task"
+        expect:
+          - statusCode: 204
+    - post: 
+        url: "{{ url_tasks }}/{{ id_task }}/close"
+        expect:
+          - statusCode: 204
+    - post: 
+        url: "{{ url_tasks }}/{{ id_task }}/reopen"
+        expect:
+          - statusCode: 204
+    - delete: 
+        url: "{{ url_tasks }}/{{ id_task }}"
+        expect:
+          - statusCode: 204
