@@ -67,6 +67,10 @@ An NPM project that has a very simple structure:
 	example:
 		
 		 export token=f6dFF8g146d7c245b07852feed922e5f354c85f297
+
+	You can still verify this command worked by executing:
+
+		echo $token
 		 
 7. Execute one of following commands:
 	
