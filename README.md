@@ -108,6 +108,12 @@ An NPM project that has a very simple structure:
 
 *NOTE: The results of the tests will be displayed on console.
 
+IMPORTANT: If you wish to modify the quantity and frequency of executions you should modify the respective yml file on the following section/variables:
+	
+		phases:
+			- duration: 1
+			arrivalRate: 1
+
 ## Contact
 
 If you have any questions, feel free to send me an email:
