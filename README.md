@@ -17,7 +17,7 @@ https://docs.google.com/document/d/18LB5rSbMGS-rViZcdDCKct-vVG8CKmPTs4LfDvvk7n8/
 
 An NPM project that has a very simple structure:
 
-**scripts**: this folder should al the yml files with the artillery scripts.
+**scripts**: this folder should all the yml files with the artillery scripts.
 **package.json**: contains NPM's project main information such as descripction, version, scripts that can be executed and more.
 ```
  performance_challenge3
@@ -54,12 +54,21 @@ An NPM project that has a very simple structure:
 1. Generate an authentication token by [signing up](https://todoist.com/prefs/integrations) on Todoist API's webpage and once you login go to [Settings/Integrations](https://todoist.com/prefs/integrations) section. Once there you will find a generated API token.
 (example: f6dFF8g146d7c245b07852feed922e5f354c85f297)
 
-3. Open git bash
-4. Clone github repository: 
+2. Open git bash
+3. Clone github repository: 
 
 		 git clone https://github.com/efraimpc89/performance_challenge3.git
 
-5. Navigate to *performance_challenge3* folder and execute one of following commands:
+4. Navigate to *performance_challenge3* folder.
+5.  Set a process environment variable so the project can read your auth token.
+		
+		export token=<api_token>
+
+	example:
+		
+		 export token=f6dFF8g146d7c245b07852feed922e5f354c85f297
+		 
+7. Execute one of following commands:
 	
 	**-To run all scenarios:**
 
